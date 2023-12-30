@@ -1,6 +1,5 @@
 // For CommonJS environment (Node.js):
-const multer = require('multer');
-const path = require('path');
+
 
 // For ES modules (if using):
 import multer from 'multer';
