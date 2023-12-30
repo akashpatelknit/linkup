@@ -6,19 +6,20 @@ import { Likes } from '../models/likes.model.js';
 import { Post } from '../models/Post.js';
 import { uploadOnCloudinary } from '../utils/cloudinary.js';
 import mongoose, { Schema, ObjectId } from 'mongoose';
+import getDataUri from '../utils/dataUri.js';
+import cloudinary from 'cloudinary';
 
 const createPost = asyncHandler(async (req, res) => {
 	const { desc } = req.body;
-	const { files } = req;
+	const { file } = req;
 	const user = await User.findById(req.user._id);
 
 	if (!user) {
 		throw new ApiError(404, 'User not found');
 	}
 
-	const imgPath = files?.post[0]?.path;
-	const imageResponce = await uploadOnCloudinary(imgPath);
-
+	const fileUri = getDataUri(file);
+	const imageResponce = await cloudinary.v2.uploader.upload(fileUri.content);
 	if (!imageResponce) {
 		throw new ApiError(500, 'Something went wrong while uploading image');
 	}

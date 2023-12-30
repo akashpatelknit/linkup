@@ -14,16 +14,11 @@ import {
 	getPosts,
 	likeAndUnlike,
 } from '../controllers/post.controller.js';
+import singleUpload from '../middlewares/multer1.js';
 const router = Router();
 
 //	create Post Route
-router
-	.route('/createPost')
-	.post(
-		varifyJWT,
-		upload.fields([{ name: 'post', maxCount: 1 }]),
-		createPost
-	);
+router.route('/createPost').post(varifyJWT, singleUpload, createPost);
 
 // likeAndUnlike route
 router.route('/likeAndUnlike').post(varifyJWT, likeAndUnlike);
