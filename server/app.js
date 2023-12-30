@@ -3,10 +3,10 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 
 const app = express();
-
+app.set('trust proxy', 1);
 app.use(
 	cors({
-		origin: process.env.CORS_ORIGIN,
+		origin: 'http://localhost:5173',
 		credentials: true,
 	})
 );

@@ -90,9 +90,8 @@ const loginUser = asyncHandler(async (req, res) => {
 	const options = {
 		httpOnly: true,
 		expires: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
-		// secure: true,
-		// sameSite: 'none',
-		// path: '/',
+		secure: true,
+		sameSite: 'none',
 	};
 
 	return res
@@ -325,7 +324,7 @@ const updateProfilePictrure = asyncHandler(async (req, res) => {
 		throw new ApiError(404, 'User not found');
 	}
 	const avatarPath = req.files?.avatar[0]?.path;
-	console.log(req.files)
+	console.log(req.files);
 	const avatar = await uploadOnCloudinary(avatarPath);
 
 	if (!avatar) {
