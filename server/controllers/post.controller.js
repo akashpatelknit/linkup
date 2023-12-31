@@ -19,7 +19,7 @@ const createPost = asyncHandler(async (req, res) => {
 	}
 
 	const fileUri = getDataUri(file);
-	const imageResponce = await cloudinary.v2.uploader.upload(fileUri.content);
+	const imageResponce = await uploadOnCloudinary(fileUri.content);
 	if (!imageResponce) {
 		throw new ApiError(500, 'Something went wrong while uploading image');
 	}

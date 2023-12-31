@@ -5,6 +5,7 @@ import { User } from '../models/user.model.js';
 import { uploadOnCloudinary } from '../utils/cloudinary.js';
 import { Following } from '../models/follow.model.js';
 import { Follower } from '../models/follower.model.js';
+import getDataUri from '../utils/dataUri.js';
 
 const generateAccessAndRefreshToken = async (userId) => {
 	try {
@@ -320,13 +321,14 @@ const getUserById = asyncHandler(async (req, res) => {
 // update controller
 const updateProfilePictrure = asyncHandler(async (req, res) => {
 	const user = await User.findById(req.user._id);
+	const { file } = req;
+	console.log(file);
 	if (!user) {
 		throw new ApiError(404, 'User not found');
 	}
-	const avatarPath = req.files?.avatar[0]?.path;
-	console.log(req.files);
-	const avatar = await uploadOnCloudinary(avatarPath);
-
+	const fileUri = getDataUri(file);
+	const avatar = await uploadOnCloudinary(fileUri.content);
+	console.log(avatar);
 	if (!avatar) {
 		throw new ApiError(500, 'Something went wrong while uploading avatar');
 	}
@@ -340,12 +342,12 @@ const updateProfilePictrure = asyncHandler(async (req, res) => {
 
 const updateCoverPictrure = asyncHandler(async (req, res) => {
 	const user = await User.findById(req.user._id);
+	const { file } = req;
 	if (!user) {
 		throw new ApiError(404, 'User not found');
 	}
-	const coverPath = req.files?.cover[0]?.path;
-
-	const cover = await uploadOnCloudinary(coverPath);
+	const fileUri = getDataUri(file);
+	const imageResponce = await uploadOnCloudinary(fileUri.content);
 
 	if (!cover) {
 		throw new ApiError(500, 'Something went wrong while uploading cover');
