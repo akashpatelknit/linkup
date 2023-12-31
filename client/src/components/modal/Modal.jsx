@@ -58,7 +58,7 @@ const EditModal = ({ user }) => {
 		e.preventDefault();
 		try {
 			const formData = new FormData();
-			formData.append('cover', coverImage);
+			formData.append('file', coverImage);
 			const res = await updateCover(formData);
 			setCoverImage();
 			dispatch(loadSpecificUSer({ userId: user?._id }));
@@ -70,7 +70,8 @@ const EditModal = ({ user }) => {
 		e.preventDefault();
 		try {
 			const formData = new FormData();
-			formData.append('avatar', avatar);
+			formData.append('file', avatar);
+			const res = await updateAvatar(formData);
 			setAvatar();
 			dispatch(loadSpecificUSer({ userId: user?._id }));
 		} catch (error) {

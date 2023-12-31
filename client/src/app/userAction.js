@@ -87,3 +87,17 @@ export const getFriendsList = createAsyncThunk(
 		}
 	}
 );
+export const updateAvatarImage = createAsyncThunk(
+	'updateAvatarImage',
+	async (data, { rejectWithValue }) => {
+		try {
+			const response = await axios.post(
+				`${url}/update/updateProfile`,
+				data
+			);
+			return response.data;
+		} catch (error) {
+			return rejectWithValue(error.response.data);
+		}
+	}
+);

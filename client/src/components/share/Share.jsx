@@ -25,7 +25,7 @@ const Share = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const formData = new FormData();
-		formData.append('post', post);
+		formData.append('file', post);
 		formData.append('desc', desc);
 		await dispatch(createPost(formData));
 		setDesc('');
