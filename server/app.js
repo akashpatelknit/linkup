@@ -6,13 +6,13 @@ const app = express();
 app.set('trust proxy', 1);
 app.use(
 	cors({
-		origin: process.env.CORS_ORIGIN,
+		origin: 'https://659aaad98ca97b915291f18d--steady-vacherin-64106b.netlify.app',
 		credentials: true,
 	})
 );
 app.use(
 	cors({
-		origin: process.env.CORS_ORIGIN,
+		origin: 'https://659aaad98ca97b915291f18d--steady-vacherin-64106b.netlify.app',
 		methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD'],
 		credentials: true,
 	})
@@ -24,7 +24,10 @@ app.use((req, res, next) => {
 	);
 	if (true) {
 		res.header('Access-Control-Allow-Credentials', true);
-		res.header('Access-Control-Allow-Origin', process.env.CORS_ORIGIN);
+		res.header(
+			'Access-Control-Allow-Origin',
+			'https://659aaad98ca97b915291f18d--steady-vacherin-64106b.netlify.app'
+		);
 	}
 	res.header(
 		'Access-Control-Allow-Methods',
