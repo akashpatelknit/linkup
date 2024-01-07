@@ -10,4 +10,7 @@ export default defineConfig({
 		preview: 'vite preview',
 		host: true,
 	},
+	build: {
+		chunkSizeWarningLimit: 1600,
+	},
 });
