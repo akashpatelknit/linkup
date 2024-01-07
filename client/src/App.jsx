@@ -1,19 +1,19 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './components/navbar/Navbar.jsx';
+// import Navbar from './components/navbar/Navbar.jsx';
 import Layout from './components/layout/Layout.jsx';
 import Register from './pages/register/Register.jsx';
 import Login from './pages/login/Login.jsx';
 import Home from './pages/home/Home.jsx';
-import Gallary from './components/gallary/Gallary.jsx';
+// import Gallary from './components/gallary/Gallary.jsx';
 import { useEffect, useState, useMemo } from 'react';
-import Cookies from 'js-cookie';
-import AlreadyLoggedIn from './pages/login/AlreadyLoggedIn.jsx';
+// import Cookies from 'js-cookie';
+// import AlreadyLoggedIn from './pages/login/AlreadyLoggedIn.jsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadUser } from './app/userAction.js';
 import { getAllUsers } from './app/allUsersAction.js';
-import Friends from './components/friends/Friends.jsx';
-import Profile from './pages/profile/Profile.jsx';
-import Chat from './pages/chat/Chat.jsx';
+// import Friends from './components/friends/Friends.jsx';
+// import Profile from './pages/profile/Profile.jsx';
+// import Chat from './pages/chat/Chat.jsx';
 import ChatProvider from './context/ChatProvider.jsx';
 // import ChatLayout from './pages/chat/ChatLayout';
 
