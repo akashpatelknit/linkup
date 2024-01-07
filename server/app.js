@@ -1,18 +1,27 @@
 import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
-
+import dotenv from 'dotenv';
+dotenv.config({ path: './.env' });
 const app = express();
 app.set('trust proxy', 1);
 app.use(
 	cors({
-		origin: 'https://linkup123.netlify.app',
+		origin:
+			process.env.NODE_ENV === 'production'
+				? process.env.CORS_ORIGIN_LIVE
+				: process.env.CORS_ORIGIN_DEV,
 		credentials: true,
 	})
 );
+console.log(process.env.NODE_ENV, process.env.CORS_ORIGIN_DEV);
+
 app.use(
 	cors({
-		origin: 'https://linkup123.netlify.app',
+		origin:
+			process.env.NODE_ENV === 'production'
+				? process.env.CORS_ORIGIN_LIVE
+				: process.env.CORS_ORIGIN_DEV,
 		methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD'],
 		credentials: true,
 	})
@@ -26,7 +35,9 @@ app.use((req, res, next) => {
 		res.header('Access-Control-Allow-Credentials', true);
 		res.header(
 			'Access-Control-Allow-Origin',
-			'https://linkup123.netlify.app'
+			process.env.NODE_ENV === 'production'
+				? process.env.CORS_ORIGIN_LIVE
+				: process.env.CORS_ORIGIN_DEV
 		);
 	}
 	res.header(
