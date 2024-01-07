@@ -3,21 +3,36 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 
 const app = express();
-
-app.use(cors());
-
+app.set('trust proxy', 1);
+app.use(
+	cors({
+		origin: 'https://linkup123.netlify.app',
+		credentials: true,
+	})
+);
+app.use(
+	cors({
+		origin: 'https://linkup123.netlify.app',
+		methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD'],
+		credentials: true,
+	})
+);
 app.use((req, res, next) => {
-	// Set headers to allow any origin
-	res.header('Access-Control-Allow-Origin', '*');
+	res.header(
+		'Access-Control-Allow-Headers',
+		'Origin, X-Requiest-With, Content-Type, Accept'
+	);
+	if (true) {
+		res.header('Access-Control-Allow-Credentials', true);
+		res.header(
+			'Access-Control-Allow-Origin',
+			'https://linkup123.netlify.app'
+		);
+	}
 	res.header(
 		'Access-Control-Allow-Methods',
 		'GET, PUT, POST, DELETE, HEAD, OPTIONS'
 	);
-	res.header(
-		'Access-Control-Allow-Headers',
-		'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-	);
-	res.header('Access-Control-Allow-Credentials', true);
 	next();
 });
 app.set('trust proxy', 1);

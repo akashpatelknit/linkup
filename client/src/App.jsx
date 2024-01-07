@@ -13,7 +13,7 @@ import { loadUser } from './app/userAction.js';
 import { getAllUsers } from './app/allUsersAction.js';
 import Friends from './components/friends/Friends.jsx';
 import Profile from './pages/profile/Profile.jsx';
-// import Chat from './pages/chat/Chat.jsx';
+import Chat from './pages/chat/Chat.jsx';
 import ChatProvider from './context/ChatProvider.jsx';
 // import ChatLayout from './pages/chat/ChatLayout';
 
@@ -81,7 +81,7 @@ const App = () => {
 							)
 						}
 					/>
-					{/* <Route
+					<Route
 						path="/chat"
 						element={
 							isAuthenticated && (
@@ -90,7 +90,7 @@ const App = () => {
 								// </ChatLayout>
 							)
 						}
-					/> */}
+					/>
 					{/* <Route
 						path="/register"
 						element={
