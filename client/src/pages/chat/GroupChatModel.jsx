@@ -15,11 +15,11 @@ import {
 } from '@chakra-ui/react';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { ChatState } from '../../Context/ChatProvider';
 import { createGroup, getChat, getSearchedUser } from '../../app/chatAction';
 import { useDispatch, useSelector } from 'react-redux';
 import UserListItem from './UserListItem';
 import UserBadgeItem from './UserBadgeItem';
+import { ChatState } from '../../context/ChatProvider';
 // import UserBadgeItem from '../userAvatar/UserBadgeItem';
 // import UserListItem from '../userAvatar/UserListItem';
 
