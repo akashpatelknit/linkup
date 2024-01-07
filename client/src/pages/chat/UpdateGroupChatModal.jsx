@@ -18,7 +18,6 @@ import {
 	Flex,
 } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
-import { ChatState } from '../../Context/ChatProvider';
 import UserBadgeItem from './UserBadgeItem';
 import UserListItem from './UserListItem';
 import {
@@ -30,6 +29,7 @@ import {
 } from '../../app/chatAction';
 import { useSelector, useDispatch } from 'react-redux';
 import ChatLoading from './ChatLoading';
+import { ChatState } from '../../context/ChatProvider';
 
 const UpdateGroupChatModal = () => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
