@@ -3,20 +3,9 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 
 const app = express();
-app.set('trust proxy', 1);
-app.use(
-	cors({
-		origin: 'https://659aaad98ca97b915291f18d--steady-vacherin-64106b.netlify.app',
-		credentials: true,
-	})
-);
-app.use(
-	cors({
-		origin: 'https://659aaad98ca97b915291f18d--steady-vacherin-64106b.netlify.app',
-		methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD'],
-		credentials: true,
-	})
-);
+
+app.use(cors({ credentials: true, origin: true }));
+
 app.use((req, res, next) => {
 	res.header(
 		'Access-Control-Allow-Headers',
