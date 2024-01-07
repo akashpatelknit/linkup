@@ -7,7 +7,7 @@ import Home from './pages/home/Home.jsx';
 // import Gallary from './components/gallary/Gallary.jsx';
 import { useEffect, useState, useMemo } from 'react';
 import Cookies from 'js-cookie';
-import AlreadyLoggedIn from './pages/login/AlreadyLoggedIn.jsx';
+// import AlreadyLoggedIn from './pages/login/AlreadyLoggedIn.jsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadUser } from './app/userAction.js';
 import { getAllUsers } from './app/allUsersAction.js';
@@ -51,7 +51,7 @@ const App = () => {
 							)
 						}
 					/>
-					<Route
+					{/* <Route
 						path="/gallary"
 						element={
 							isAuthenticated && (
@@ -60,8 +60,8 @@ const App = () => {
 								</Layout>
 							)
 						}
-					/>
-					{/* <Route
+					/> */}
+					<Route
 						path="/friends"
 						element={
 							isAuthenticated && (
@@ -70,7 +70,7 @@ const App = () => {
 								</Layout>
 							)
 						}
-					/> */}
+					/>
 					<Route
 						path="/profile/:userId"
 						element={
