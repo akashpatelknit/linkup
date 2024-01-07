@@ -15,7 +15,7 @@ app.use((req, res, next) => {
 		res.header('Access-Control-Allow-Credentials', true);
 		res.header(
 			'Access-Control-Allow-Origin',
-			'https://659aaad98ca97b915291f18d--steady-vacherin-64106b.netlify.app'
+			'*'
 		);
 	}
 	res.header(

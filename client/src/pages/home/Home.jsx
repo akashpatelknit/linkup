@@ -8,9 +8,9 @@ import { getOverAllPost } from '../../app/postAction.js';
 
 const Home = () => {
 	const dispatch = useDispatch();
-	// useEffect(() => {
-	// 	dispatch(getOverAllPost());
-	// }, [dispatch]);
+	useEffect(() => {
+		dispatch(getOverAllPost());
+	}, [dispatch]);
 	const overAllPosts = useSelector((state) => state.posts?.overAllPosts);
 	return (
 		<Box width={'full'}>
