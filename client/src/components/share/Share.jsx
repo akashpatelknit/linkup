@@ -46,7 +46,7 @@ const Share = () => {
 					<Avatar
 						name={fullname}
 						src={avatar}
-						filter={'grayScale(1)'}
+						// filter={'grayScale(1)'}
 					/>
 					<input
 						type="text"

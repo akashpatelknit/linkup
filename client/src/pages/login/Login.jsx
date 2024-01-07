@@ -13,23 +13,33 @@ import {
 	Link,
 } from '@chakra-ui/react';
 import { useState } from 'react';
-import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginUser } from '../../app/userAction.js';
+import { useLoginUserMutation } from '../../api/auth/auth';
+import { loadUser } from '../../app/userAction';
+// import { loginUser } from '../../app/userAction.js';
 
 export default function Login() {
 	const [loginData, setLoginData] = useState('');
-	const isLoading = false;
-	// const [loginUser, { data, isLoading, isSuccess }] = useLoginUserMutation();
+	// const isLoading = false;
+	const [loginUser, { data, isLoading, isSuccess }] = useLoginUserMutation();
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const handleChange = (e) => {
 		setLoginData({ ...loginData, [e.target.name]: e.target.value });
 	};
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-		dispatch(loginUser(loginData));
+		try {
+			const res = await loginUser(loginData);
+			console.log(res);
+			if (res.data) {
+				dispatch(loadUser());
+				navigate('/');
+			}
+		} catch (error) {
+			console.log(error);
+		}
 	};
 	return (
 		<Flex
@@ -91,8 +101,9 @@ export default function Login() {
 								}}
 								bg={'#60C9CA'}
 								onClick={handleSubmit}
+								isLoading={isLoading}
 							>
-								{isLoading ? 'Loading...' : 'Sign in'}
+								Sign in
 							</Button>
 						</Stack>
 					</Stack>

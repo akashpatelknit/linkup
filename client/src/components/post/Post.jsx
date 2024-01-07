@@ -5,7 +5,7 @@ import TextsmsOutlinedIcon from '@mui/icons-material/TextsmsOutlined';
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import Comments from '../comments/Comments';
-import { useEffect, useState } from 'react';
+import { memo, useCallback, useEffect, useState } from 'react';
 import { Avatar, Box, Button, Flex, Image, Text } from '@chakra-ui/react';
 import date from 'date-and-time';
 import { Link } from 'react-router-dom';
@@ -17,6 +17,9 @@ import {
 } from '../../app/postAction';
 import { getComment } from '../../app/mAct';
 import { calculateTimeSpent } from '../../utils/timeCalculate';
+import LazyImage from '../LazyImage/LazyImage';
+import { useLikePostMutation } from '../../api/auth/auth';
+import { updateOverAllLikes } from '../../app/postSlice';
 
 const Post = ({ post }) => {
 	const dispatch = useDispatch();
@@ -25,6 +28,8 @@ const Post = ({ post }) => {
 	const { desc, img, likes, createdAt, _id } = post;
 	const [commentOpen, setCommentOpen] = useState(false);
 	const [relode, setRelode] = useState(false);
+
+	const [likePost, { isLoading: isLikePost }] = useLikePostMutation();
 
 	const [liked, setLiked] = useState(
 		likes?.some((like) => like.userId === userInfo._id)
@@ -35,19 +40,39 @@ const Post = ({ post }) => {
 		'ddd, HH:mm, MMM DD YYYY'
 	);
 
-	const handleLike = async (_id) => {
-		setLiked(!liked);
-		await dispatch(likeAndUnlikePost({ postId: _id }));
-		dispatch(getOverAllPost());
-	};
-	const handleCommentOpenAndCloseAndFetch = async (postId) => {
-		setCommentOpen(!commentOpen);
-		dispatch(getComment({ postId: postId }));
-	};
-	useEffect(() => {
+	const handleLike = useCallback(
+		async (_id) => {
+			try {
+				const res = await likePost({ postId: _id });
+				if (res.data) {
+					setLiked((prev) => !prev);
+					dispatch(
+						updateOverAllLikes({ postId: _id, data: res.data })
+					);
+				}
+			} catch (error) {
+				console.log(error);
+			}
+		},
+		[_id, dispatch]
+	);
+
+	const handleCommentOpenAndCloseAndFetch = useCallback(
+		async (postId) => {
+			setCommentOpen(!commentOpen);
+			dispatch(getComment({ postId: postId }));
+			console.log('get comment function');
+		},
+		[setCommentOpen, commentOpen]
+	);
+
+	useCallback(() => {
 		dispatch(getComment({ postId: post?._id }));
 		dispatch(getOverAllPost());
+		console.log('get comment');
 	}, [relode]);
+
+	console.log('render');
 
 	return (
 		<Box
@@ -64,7 +89,7 @@ const Post = ({ post }) => {
 							<Avatar
 								name={fullname}
 								src={avatar}
-								filter={'grayScale(1)'}
+								// filter={'grayScale(1)'}
 							/>
 							<Link
 								to={`/profile/${userId}`}
@@ -98,7 +123,7 @@ const Post = ({ post }) => {
 						margin={'auto'}
 						justifyContent={'center'}
 					>
-						<Image
+						<LazyImage
 							src={img}
 							alt={img}
 							width={'100%'}
@@ -106,7 +131,7 @@ const Post = ({ post }) => {
 							objectFit={'cover'}
 							objectPosition={'center'}
 							borderRadius={10}
-							filter={'grayScale(1)'}
+							// filter={'grayScale(1)'}
 						/>
 					</Flex>
 				</div>
@@ -147,4 +172,4 @@ const Post = ({ post }) => {
 	);
 };
 
-export default Post;
+export default memo(Post);

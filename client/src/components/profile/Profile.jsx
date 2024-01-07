@@ -36,7 +36,6 @@ export default function SocialProfileWithImage({ user }) {
 					src={coverImage}
 					objectFit="cover"
 					alt="#"
-					filter={'grayScale(1)'}
 				/>
 				<Flex justify={'center'} mt={-12}>
 					<Avatar

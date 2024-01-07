@@ -19,7 +19,7 @@ import ChatProvider from './context/ChatProvider.jsx';
 
 const App = () => {
 	const dispatch = useDispatch();
-	const { isAuthenticated } = useSelector((state) => state.user);
+	const { isAuthenticated, loading } = useSelector((state) => state.user);
 	const user = useSelector((state) => state.user?.userInfo);
 	useEffect(() => {
 		dispatch(loadUser());

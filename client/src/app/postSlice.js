@@ -21,10 +21,23 @@ const postSlice = createSlice({
 	initialState: {
 		loading: false,
 		error: null,
+		allPosts: [],
+		overAllPosts: [],
 	},
 	reducers: {
-		updateLocalLang: (state, action) => {
-			state.userInfo.language = action.payload;
+		updateOverAllLikes: (state, action) => {
+			let index = state.overAllPosts.findIndex(
+				(post) => post._id === action.payload.postId
+			);
+			let isPostLiked = state.overAllPosts[index].likes?.findIndex(
+				(like) => like._id === action.payload.data.data._id
+			);
+			// console.log(action.payload.data.data, index);
+			if (isPostLiked !== -1) {
+				state.overAllPosts[index].likes.splice(index, 1);
+			} else {
+				state.overAllPosts[index].likes?.push(action.payload.data.data);
+			}
 		},
 	},
 	extraReducers: (builder) => {
@@ -75,5 +88,5 @@ const postSlice = createSlice({
 	},
 });
 
-export const { updateLocalLang } = postSlice.actions;
+export const { updateOverAllLikes } = postSlice.actions;
 export default postSlice.reducer;

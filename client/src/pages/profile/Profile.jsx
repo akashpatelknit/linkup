@@ -30,7 +30,7 @@ const Profile = () => {
 	const allPosts = useSelector((state) => state.posts?.allPosts);
 
 	return (
-		<Box className="profile">
+		<Box width={'full'}>
 			<Box width={'100%'} h={'300px'} position={'relative'}>
 				<Box w={'100%'} h={'100%'} pos={'absolute'}>
 					<Image

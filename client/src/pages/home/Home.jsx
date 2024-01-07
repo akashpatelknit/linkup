@@ -13,7 +13,7 @@ const Home = () => {
 	}, [dispatch]);
 	const overAllPosts = useSelector((state) => state.posts?.overAllPosts);
 	return (
-		<Box>
+		<Box width={'full'}>
 			{/* <Box px={20}><Stories /></Box> */}
 			<Box>
 				<Share />

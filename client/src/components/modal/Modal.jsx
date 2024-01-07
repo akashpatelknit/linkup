@@ -248,7 +248,6 @@ const EditModal = ({ user }) => {
 							mr={3}
 							onClick={onClose}
 							isLoading={isUserDetailLoading}
-							loadingText="Uploading..."
 						>
 							Close
 						</Button>

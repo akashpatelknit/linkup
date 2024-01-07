@@ -50,6 +50,9 @@ const registerUser = asyncHandler(async (req, res) => {
 		password,
 	});
 
+	const { refreshToken, accessToken } = await generateAccessAndRefreshToken(
+		user._id
+	);
 	// remove password and refreshToken from response
 	const createUSer = await User.findById(user._id).select(
 		'-password -refreshToken'
@@ -59,10 +62,17 @@ const registerUser = asyncHandler(async (req, res) => {
 	if (!createUSer) {
 		throw new ApiError(500, 'Something went wrong while creating user');
 	}
-
+	const options = {
+		httpOnly: true,
+		expires: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
+		secure: true,
+		sameSite: 'none',
+	};
 	// return response
 	return res
 		.status(201)
+		.cookie('refreshToken', refreshToken, options)
+		.cookie('accessToken', accessToken, options)
 		.json(new ApiResponse(200, createUSer, 'User created successfully'));
 });
 
@@ -322,13 +332,11 @@ const getUserById = asyncHandler(async (req, res) => {
 const updateProfilePictrure = asyncHandler(async (req, res) => {
 	const user = await User.findById(req.user._id);
 	const { file } = req;
-	console.log(file);
 	if (!user) {
 		throw new ApiError(404, 'User not found');
 	}
 	const fileUri = getDataUri(file);
 	const avatar = await uploadOnCloudinary(fileUri.content);
-	console.log(avatar);
 	if (!avatar) {
 		throw new ApiError(500, 'Something went wrong while uploading avatar');
 	}
