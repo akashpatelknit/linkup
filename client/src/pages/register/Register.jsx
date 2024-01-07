@@ -75,7 +75,7 @@ export default function Register() {
 									<FormLabel>User Name</FormLabel>
 									<Input
 										type="text"
-										value={username}
+										value={username || ''}
 										onChange={(e) =>
 											setUsername(e.target.value)
 										}
@@ -87,7 +87,7 @@ export default function Register() {
 									<FormLabel>Full Name</FormLabel>
 									<Input
 										type="text"
-										value={fullname}
+										value={fullname || ''}
 										onChange={(e) =>
 											setFullname(e.target.value)
 										}
@@ -99,7 +99,7 @@ export default function Register() {
 							<FormLabel>Email address</FormLabel>
 							<Input
 								type="emial"
-								value={email}
+								value={email || ''}
 								onChange={(e) => setEmail(e.target.value)}
 							/>
 						</FormControl>
@@ -108,7 +108,7 @@ export default function Register() {
 							<InputGroup>
 								<Input
 									type={showPassword ? 'text' : 'password'}
-									value={password}
+									value={password || ''}
 									onChange={(e) =>
 										setPassword(e.target.value)
 									}

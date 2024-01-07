@@ -67,7 +67,7 @@ export default function Login() {
 							<Input
 								type="email"
 								name="email"
-								value={loginData.email}
+								value={loginData.email || ''}
 								onChange={(e) => {
 									handleChange(e);
 								}}
@@ -78,7 +78,7 @@ export default function Login() {
 							<Input
 								type="password"
 								name="password"
-								value={loginData.password}
+								value={loginData.password || ''}
 								onChange={(e) => {
 									handleChange(e);
 								}}
