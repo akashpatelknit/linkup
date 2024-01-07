@@ -6,13 +6,13 @@ const app = express();
 app.set('trust proxy', 1);
 app.use(
 	cors({
-		origin: 'http://localhost:5173',
+		origin: process.env.CORS_ORIGIN,
 		credentials: true,
 	})
 );
 app.use(
 	cors({
-		origin: 'http://localhost:5173',
+		origin: process.env.CORS_ORIGIN,
 		methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD'],
 		credentials: true,
 	})
@@ -24,7 +24,7 @@ app.use((req, res, next) => {
 	);
 	if (true) {
 		res.header('Access-Control-Allow-Credentials', true);
-		res.header('Access-Control-Allow-Origin', 'http://localhost:5173');
+		res.header('Access-Control-Allow-Origin', process.env.CORS_ORIGIN);
 	}
 	res.header(
 		'Access-Control-Allow-Methods',
