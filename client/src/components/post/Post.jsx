@@ -5,7 +5,7 @@ import TextsmsOutlinedIcon from '@mui/icons-material/TextsmsOutlined';
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import Comments from '../comments/Comments';
-import { memo, useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Avatar, Box, Button, Flex, Image, Text } from '@chakra-ui/react';
 import date from 'date-and-time';
 import { Link } from 'react-router-dom';
@@ -66,13 +66,13 @@ const Post = ({ post }) => {
 		[setCommentOpen, commentOpen]
 	);
 
-	useCallback(() => {
-		dispatch(getComment({ postId: post?._id }));
-		dispatch(getOverAllPost());
-		console.log('get comment');
-	}, [relode]);
+	// useCallback(() => {
+	// 	dispatch(getComment({ postId: post?._id }));
+	// 	dispatch(getOverAllPost());
+	// 	console.log('get comment');
+	// }, [relode]);
 
-	console.log('render');
+	// console.log('render');
 
 	return (
 		<Box
@@ -172,4 +172,4 @@ const Post = ({ post }) => {
 	);
 };
 
-export default memo(Post);
+export default Post;

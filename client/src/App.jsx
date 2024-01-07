@@ -51,7 +51,7 @@ const App = () => {
 							)
 						}
 					/>
-					<Route
+					{/* <Route
 						path="/gallary"
 						element={
 							isAuthenticated && (
@@ -97,7 +97,7 @@ const App = () => {
 							isAuthenticated ? <AlreadyLoggedIn /> : <Register />
 						}
 					/>
-					<Route path="/login" element={<Login />} />
+					<Route path="/login" element={<Login />} /> */}
 				</Routes>
 			</ChatProvider>
 		</Router>

@@ -19,13 +19,13 @@ const RightBar = () => {
 	const display = useBreakpointValue({ base: 'none', lg: 'flex' });
 	const dispatch = useDispatch();
 	const allUser = useSelector((state) => state.allUser?.allUser);
-	useEffect(() => {
-		dispatch(getAllUsers());
-	}, []);
-	const handleFollow =async (_id) => {
-		await dispatch(followUser({ followingUserId: _id }));
-		dispatch(getAllUsers());
-	};
+	// useEffect(() => {
+	// 	dispatch(getAllUsers());
+	// }, []);
+	// const handleFollow =async (_id) => {
+	// 	await dispatch(followUser({ followingUserId: _id }));
+	// 	dispatch(getAllUsers());
+	// };
 	return (
 		<Box px={5} pos={'fixed'} display={display}>
 			<Box
