@@ -1,20 +1,25 @@
 import './post.scss';
+import { lazy, memo, useCallback, useEffect, useState } from 'react';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+
 import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
 import TextsmsOutlinedIcon from '@mui/icons-material/TextsmsOutlined';
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import Comments from '../comments/Comments';
-import { useCallback, useEffect, useState } from 'react';
-import { Avatar, Box, Button, Flex, Image, Text } from '@chakra-ui/react';
+
+const Comments = lazy(() => import('../comments/Comments'));
+const EditPostMenu = lazy(() => import('./EditPostMenu'));
+import {
+	Avatar,
+	Box,
+	Button,
+	Flex,
+	Text,
+	useDisclosure,
+} from '@chakra-ui/react';
 import date from 'date-and-time';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-	getAllPost,
-	getOverAllPost,
-	likeAndUnlikePost,
-} from '../../app/postAction';
+
 import { getComment } from '../../app/mAct';
 import { calculateTimeSpent } from '../../utils/timeCalculate';
 import LazyImage from '../LazyImage/LazyImage';
@@ -22,13 +27,14 @@ import { useLikePostMutation } from '../../api/auth/auth';
 import { updateOverAllLikes } from '../../app/postSlice';
 
 const Post = ({ post }) => {
+	const { isOpen, onOpen, onClose } = useDisclosure();
 	const dispatch = useDispatch();
 	const userInfo = useSelector((state) => state.user?.userInfo);
 	const { avatar, fullname, _id: userId } = post.owner;
 	const { desc, img, likes, createdAt, _id } = post;
 	const [commentOpen, setCommentOpen] = useState(false);
 	const [relode, setRelode] = useState(false);
-
+	console.log('posts child');
 	const [likePost, { isLoading: isLikePost }] = useLikePostMutation();
 
 	const [liked, setLiked] = useState(
@@ -66,14 +72,6 @@ const Post = ({ post }) => {
 		[setCommentOpen, commentOpen]
 	);
 
-	// useCallback(() => {
-	// 	dispatch(getComment({ postId: post?._id }));
-	// 	dispatch(getOverAllPost());
-	// 	console.log('get comment');
-	// }, [relode]);
-
-	// console.log('render');
-
 	return (
 		<Box
 			className="post"
@@ -81,10 +79,12 @@ const Post = ({ post }) => {
 			boxShadow={'md'}
 			borderRadius={10}
 			width={'100%'}
+			position={'relative'}
 		>
 			<Box className="container" p={2}>
-				<Flex justifyContent={'space-between'}>
-					<Flex className="userInfo">
+				{/* USER DETAILS */}
+				<Flex justifyContent={'space-between'} alignItems={'center'}>
+					<Flex>
 						<Flex alignItems="center" gap={2}>
 							<Avatar
 								name={fullname}
@@ -112,9 +112,11 @@ const Post = ({ post }) => {
 							</Link>
 						</Flex>
 					</Flex>
-					<MoreHorizIcon />
+					<EditPostMenu />
 				</Flex>
-				<div className="content">
+
+				{/* POST IMAGE */}
+				<Box>
 					<Text py={1} pl={2}>
 						{desc}
 					</Text>
@@ -131,10 +133,11 @@ const Post = ({ post }) => {
 							objectFit={'cover'}
 							objectPosition={'center'}
 							borderRadius={10}
-							// filter={'grayScale(1)'}
 						/>
 					</Flex>
-				</div>
+				</Box>
+
+					{/* LIKES ans COMMERNT */}
 				<Flex
 					mt={2}
 					justifyContent={'space-between'}
@@ -151,6 +154,7 @@ const Post = ({ post }) => {
 						</Box>
 						{likes?.length} Likes
 					</Flex>
+
 					<Flex className="item">
 						<Button
 							onClick={() =>
@@ -172,4 +176,4 @@ const Post = ({ post }) => {
 	);
 };
 
-export default Post;
+export default memo(Post);

@@ -15,7 +15,7 @@ const MyChatsUserList = ({ chat }) => {
 
 	return (
 		<Flex
-			onClick={() => setSelectedChat(chat)}
+			onClick={() => setSelectedChat((prev) => chat)}
 			cursor="pointer"
 			bg={selectedChat === chat ? '#38B2AC' : '#E8E8E8'}
 			color={selectedChat === chat ? 'white' : 'black'}

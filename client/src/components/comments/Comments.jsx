@@ -1,10 +1,10 @@
 // import { useContext } from "react";
 import { Avatar, Box, Button, Flex, Input, Text } from '@chakra-ui/react';
+import { memo, useState } from 'react';
 import './comments.scss';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { createComment, getComment } from '../../app/mAct';
-import { useState } from 'react';
 import date from 'date-and-time';
 import { calculateTimeSpent } from '../../utils/timeCalculate';
 import { useCreateCommentMutation } from '../../api/auth/auth';
@@ -27,7 +27,7 @@ const Comments = ({ post, setRelode }) => {
 			setCommentContent('');
 		}
 	};
-	console.log('comments render');
+	console.log('post child');
 	const { comments } = useSelector((state) => state.message);
 	return (
 		<Box mt={5}>
@@ -71,4 +71,4 @@ const Comments = ({ post, setRelode }) => {
 	);
 };
 
-export default Comments;
+export default memo(Comments);

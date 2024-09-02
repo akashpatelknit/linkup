@@ -54,6 +54,7 @@ const Share = () => {
 						value={desc}
 						placeholder={`What's on your mind......`}
 						onChange={(e) => setDesc(e.target.value)}
+						
 					/>
 				</Flex>
 				<hr />

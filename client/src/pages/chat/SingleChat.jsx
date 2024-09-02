@@ -68,11 +68,11 @@ const SingleChat = () => {
 
 						{!selectedChat.isGroupChat ? (
 							<>
-								{getSender(user, selectedChat.users)}
+								{getSender(user, selectedChat?.users)}
 								<ProfileModal
 									user={getSenderFull(
 										user,
-										selectedChat.users
+										selectedChat?.users
 									)}
 								/>
 							</>

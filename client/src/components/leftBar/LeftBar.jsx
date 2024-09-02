@@ -28,6 +28,7 @@ const LeftBar = () => {
 			display={{ base: 'none', md: 'flex', xl: 'flex' }}
 			position={{ base: 'none', md: 'fixed', xl: 'fixed' }}
 			height={'full'}
+			pt={3}
 		>
 			<Box className="container" px={2} width={'350px'}>
 				<Box className="menu" width={'100%'}>

@@ -1,13 +1,14 @@
 import { Box, Flex } from '@chakra-ui/layout';
-import { useEffect, useState } from 'react';
-import SideBar from './SideBar';
-import { ChatState } from '../../context/ChatProvider';
-import MyChats from './MyChats';
-import Chatbox from './Chatbox';
-import { useDispatch } from 'react-redux';
-import { loadUser } from '../../app/userAction';
+import { lazy, useEffect, useState } from 'react';
 
-const Chatpage = () => {
+import { useDispatch } from 'react-redux';
+import { ChatState } from '../../context/ChatProvider';
+import { loadUser } from '../../app/userAction';
+const SideBar = lazy(() => import('./SideBar'));
+const MyChats = lazy(() => import('./MyChats'));
+const Chatbox = lazy(() => import('./Chatbox'));
+
+const Chat = () => {
 	const [fetchAgain, setFetchAgain] = useState(false);
 	const dispatch = useDispatch();
 	useEffect(() => {
@@ -26,4 +27,4 @@ const Chatpage = () => {
 	);
 };
 
-export default Chatpage;
+export default Chat;

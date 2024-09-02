@@ -35,7 +35,7 @@ const Navbar = () => {
 			boxShadow={'md'}
 			pos={'fixed'}
 			zIndex={999}
-			bg={'white'}
+			// bg={'white'}
 			height={'80px'}
 			width={'full'}
 		>

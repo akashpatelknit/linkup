@@ -13,6 +13,7 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { loadSpecificUSer } from '../../app/userAction';
+import Face6Icon from '@mui/icons-material/Face6';
 
 const FriendsProfileCards = ({ user }) => {
 	const { avatar, fullname, _id, coverImage, bio } = user;
@@ -29,24 +30,25 @@ const FriendsProfileCards = ({ user }) => {
 				rounded={'md'}
 				overflow={'hidden'}
 				width={'250px'}
-				height={'350px'}
+				minH={'350px'}
 			>
 				<Image
 					h={'120px'}
 					w={'full'}
 					src={coverImage}
 					objectFit="cover"
-					alt="#"
-					// filter={'grayScale(1)'}
+					alt={fullname}
+					loading="lazy"
 				/>
 				<Flex justify={'center'} mt={-12}>
 					<Avatar
 						size={'xl'}
 						src={avatar}
-						// filter={'grayScale(1)'}
 						css={{
 							border: '2px solid white',
 						}}
+						loading="lazy"
+						alt={fullname}
 					/>
 				</Flex>
 
@@ -61,7 +63,12 @@ const FriendsProfileCards = ({ user }) => {
 						>
 							{fullname}
 						</Heading>
-						<Text color={'gray.500'}>{bio}</Text>
+						<Flex>
+							<Face6Icon />
+							<Text color={'gray.500'} textAlign={'center'}>
+								{bio}
+							</Text>
+						</Flex>
 					</Stack>
 
 					<Link to={`/profile/${_id}`}>

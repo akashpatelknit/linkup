@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Button } from '@chakra-ui/button';
 import { useDisclosure } from '@chakra-ui/hooks';
 import { Input } from '@chakra-ui/input';
@@ -32,12 +32,17 @@ import ChatLoading from './ChatLoading';
 import { Spinner } from '@chakra-ui/react';
 import ChatProvider, { ChatState } from '../../context/ChatProvider';
 import { Search2Icon } from '@chakra-ui/icons';
+import { useCreateChatMutation } from '../../api/chat/chat';
+// import { useCreateChatMutation } from '../../api/chat/chat';
+
 const SideBar = () => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const [search, setSearch] = useState('');
 	const [loadingChat, setLoadingChat] = useState(false);
+	const [selectedChatUserId, setSelectedChatUserId] = useState(null);
 	const toast = useToast();
 	const dispatch = useDispatch();
+	const [createChat, { data, isLoading }] = useCreateChatMutation();
 	const {
 		selectedChat,
 		setSelectedChat,
@@ -53,10 +58,20 @@ const SideBar = () => {
 
 	const { searchedUsers, loading } = useSelector((state) => state.chat);
 
-	const accessChat = (userId) => {
-		setSelectedChat(true);
-		dispatch(fetchChat(userId));
-	};
+	const accessChat = useCallback(
+		async (userId) => {
+			setSelectedChat(true);
+			// dispatch(fetchChat(userId));
+			console.log('create chat userId', userId);
+			try {
+				const res = await createChat({userId});
+				console.log(res.data);
+			} catch (error) {
+				console.log(error);
+			}
+		},
+		[selectedChatUserId]
+	);
 
 	return (
 		<>
@@ -159,9 +174,10 @@ const SideBar = () => {
 									<UserListItem
 										key={user._id}
 										user={user}
-										handleFunction={() =>
-											accessChat(user._id)
-										}
+										handleFunction={() => {
+											accessChat(user._id);
+											setSelectedChatUserId(user._id);
+										}}
 									/>
 								))
 							)}

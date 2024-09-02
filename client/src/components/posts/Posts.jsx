@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getAllPost } from '../../app/postAction';
 import { Box } from '@chakra-ui/react';
 const Posts = ({ allPosts }) => {
+	console.log('posts')
 	return (
 		<Box pb={20}>
 			{allPosts?.map((post) => (

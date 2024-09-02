@@ -19,9 +19,9 @@ const MyChats = () => {
 		dispatch(getChat());
 	}, []);
 
-	// useEffect(() => {
-	// 	dispatch(getM(selectedChat?._id));
-	// }, [selectedChat]);
+	useEffect(() => {
+		dispatch(getM(selectedChat?._id));
+	}, [selectedChat]);
 
 	const { chats } = useSelector((state) => state.chat);
 	// console.log('chat', chats,user);

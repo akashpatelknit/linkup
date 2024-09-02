@@ -27,7 +27,7 @@ const RightBar = () => {
 		dispatch(getAllUsers());
 	};
 	return (
-		<Box px={5} pos={'fixed'} display={display}>
+		<Box px={5} pos={'fixed'} display={display} pt={3}>
 			<Box
 				className="container"
 				px={5}
@@ -46,29 +46,38 @@ const RightBar = () => {
 					<br />
 					{allUser?.data?.map((user) => (
 						<Box key={user._id}>
-							<Flex alignItems={'center'} gap={5}>
-								<Flex alignItems={'center'} gap={5}>
-									<Avatar
-										name={user?.fullname}
-										src={user?.avatar}
-										filter={'grayscale(1)'}
-									/>
-									<Flex flexDirection={'column'}>
+							<Flex alignItems={'center'} gap={5} width={'full'}>
+								<Flex
+									alignItems={'center'}
+									gap={5}
+									justifyContent={'space-between'}
+									width={'full'}
+								>
+									<Box>
+										<Avatar
+											name={user?.fullname}
+											src={user?.avatar}
+										/>
+									</Box>
+									<Flex
+										alignItems={'center'}
+										justifyContent={'space-between'}
+										width={'full'}
+									>
 										<Link
 											to={`/profile/${user._id}`}
 											fontWeight={500}
 										>
 											{user?.fullname}
 										</Link>
-										<Flex gap={3} pt={2}>
-											<Button
-												onClick={() =>
-													handleFollow(user._id)
-												}
-											>
-												Follow
-											</Button>
-										</Flex>
+
+										<Button
+											onClick={() =>
+												handleFollow(user._id)
+											}
+										>
+											Follow
+										</Button>
 									</Flex>
 								</Flex>
 							</Flex>
