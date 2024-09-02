@@ -7,7 +7,7 @@ const Login = lazy(() => import('./pages/login/Login.jsx'));
 const Home = lazy(() => import('./pages/home/Home.jsx'));
 const Friends = lazy(() => import('./components/friends/Friends.jsx'));
 const Profile = lazy(() => import('./pages/profile/Profile.jsx'));
-const Chat = lazy(() => import('./pages/chat/chat'));
+// const Chat = lazy(() => import('./pages/chat/chat'));
 const ChatProvider = lazy(() => import('./context/ChatProvider.jsx'));
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -81,16 +81,16 @@ const App = () => {
 								)
 							}
 						/>
-						<Route
+						{/* <Route
 							path="/chat"
 							element={
 								isAuthenticated && (
 									// <ChatLayout>
-									<Chat />
+									// <Chat />
 									// </ChatLayout>
 								)
 							}
-						/>
+						/> */}
 						{/* <Route
 						path="/register"
 						element={

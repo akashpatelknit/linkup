@@ -6,7 +6,7 @@ import { ApiResponse } from '../utils/ApiResponse.js';
 
 export const accessChat = asyncHandler(async (req, res, next) => {
 	const { userId } = req.body;
-
+	console.log('access chat', req.body);
 	if (!userId) {
 		return res.sendStatus(400);
 	}
@@ -55,6 +55,7 @@ export const accessChat = asyncHandler(async (req, res, next) => {
 });
 
 export const fetchChats = asyncHandler(async (req, res) => {
+	console.log('fetch chat', req.body);
 	try {
 		Chat.find({ users: { $elemMatch: { $eq: req.user._id } } })
 			.populate(

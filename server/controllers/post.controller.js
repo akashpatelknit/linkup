@@ -40,6 +40,21 @@ const createPost = asyncHandler(async (req, res) => {
 		.json(new ApiResponse(201, post, 'Post created successfully'));
 });
 
+const deletePost = asyncHandler(async (req, res) => {
+	const { postId } = req.body;
+	const post = await Post.findById(postId);
+	if (!post) {
+		throw new ApiError(404, 'Post not found');
+	}
+	if (post.owner.toString() !== req.user._id.toString()) {
+		throw new ApiError(401, 'You are not authorized to delete this post');
+	}
+	await Post.findByIdAndDelete(postId);
+	return res
+		.status(200)
+		.json(new ApiResponse(200, post, 'Post deleted successfully'));
+});
+
 const getPosts = asyncHandler(async (req, res) => {
 	const { userId } = req.params;
 	const post = await Post.aggregate([
